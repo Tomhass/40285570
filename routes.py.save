@@ -1,36 +1,30 @@
+
 import ConfigParser
 from flask import Flask, redirect, url_for, render_template, session
 from config import Config
-
+from forms import Forms
 app = Flask(__name__)
-app.secret_key = 'sd3.4=109ga.klma3,420-4123'
 
+
+SESSION_TYPE = 'redis'
 app.config.from_object(__name__)
+
+
+# SESSION SET/GET
+@app.route('/set/')
+def set():
+	session['key'] = 'value'
+	return 'ok'
+
+@app.route('/get/')
+def get():
+	return session.get('key', 'not set')
 
 
 #ROOT
 @app.route('/')
 def index():
 	return render_template('./home.html')
-
-@app.route('/session/write/<name>/')
-def write(name=None):
-	session['name'] = name
-	return 'Wrote %s into "name" key of session' % name
-
-@app.route('/session/read/')
-def read():
-	try:
-		if(session['name']):
-			return str(session['name'])
-	except KeyError:
-		pass
-	return 'No session variable set for "name" key'
-
-@app.route('/session/remove/')
-def remove():
-	session.pop('name', None)
-	return "Removed key 'name' from session"
 
 @app.route('/config/')
 def config():
