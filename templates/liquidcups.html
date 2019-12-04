@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./static/css/styles.css"/>
+    <script type="text/javascript" src="./static/scripts/game.js"></script>
+
+</head>
+
+<body>
+
+<ul>
+    <div id="hidesmall"><li><a href="./">Home</a></li></div>
+    <div id="testhide"><li><a href="./recipes">Recipes</a></li></div>
+    <div id="testhide"><li><a href="./unitconversion">Unit Conversion</a></li></div>
+    <div id="testhide" style="float: right;"><li><a href="./login">Login</a></li></div>
+    <div id="testhide" style="float: right;"><li><a href="./register">Register</a></li></div>
+</ul>
+
+<div class = "content">
+    <div class="contentcontainer">
+        <h1>Liquids</h1>
+        <div class="USWeights">
+            <h1>IMPERIAL MEASUREMENTS</h1>
+            <h2>Cups:</h2> <br>
+            <input type="text" id="cups"> 
+            <h2>Tablespoons:</h2> <br>
+            <input type="text" id="tablespoons"> 
+            <h2>Teaspoons:</h2> <br>
+            <input type="text" id="teaspoons"> 
+            <br> <br> <br>
+            <button type="button" onclick="usConversion()">Convert!</button>
+
+        </div>
+        <div class="UKWeights">
+            <h1>METRIC MEASUREMENTS</h1>
+            <h2>Litres:</h2> <br>
+            <input type="text" id="litres"> <br>
+            <h2>Millilitres:</h2>
+            <input type="text" id="millilitres"> <br>
+            <br><br>
+            <button type="button" onclick="ukConversion()">Convert!</button>
+
+        </div>
+
+    </div>
+
+
+</div>
+</body>

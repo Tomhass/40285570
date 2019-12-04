@@ -1,0 +1,23 @@
+from flask import Flask, g
+import sqlite3
+
+from flask import Flask
+app = Flask(__name__)
+
+with sqlite3.connect("users.db") as db:
+	cursor = db.cursor()
+
+def init_db():
+	cursor.execute("""
+	CREATE TABLE IF NOT EXISTS users(
+	userId INTEGER PRIMARY KEY,
+	username VARCHAR(20) NOT NULL,
+	email VARCHAR(30) NOT NULL,
+	password VARCHAR(20) NOT NULL);
+""")
+
+
+	
+
+if __name__ == "__main__":
+	app.run(host="0.0.0.0", debug=True)

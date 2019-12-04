@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles.css"/>
 
     <script type="text/javascript" src="game.js"></script>
 </head>
@@ -10,18 +10,18 @@
 <body>
 
 <ul>
-    <div id="hidesmall"><li><a href="/">Home</a></li></div>
-    <div id="testhide"><li><a href="/recipes">Recipes</a></li></div>
-    <div id="testhide"><li><a href="/unitconversion">Unit Conversion</a></li></div>
-    <div id="testhide" style="float: right;"><li><a href="/login">Login</a></li></div>
-    <div id="testhide" style="float: right;"><li><a href="/register">Register</a></li></div>
+    <div id="hidesmall"><li><a href="./home.html">H o m e</a></li></div>
+    <div id="testhide"><li><a href="./recipes.html">Recipes</a></li></div>
+    <div id="testhide"><li><a href="./unitconversion.html">Unit Conversion</a></li></div>
+    <div id="testhide" style="float: right;"><li><a href="./login.html">Login</a></li></div>
+    <div id="testhide" style="float: right;"><li><a href="./register.html">Register</a></li></div>
 </ul>
 
 <div class = "content">
     <div class="contentcontainer">
             <div class="left_content">
                 <div class ="recipeimagecontainer"> 
-                    <a href="./recipes"><img src="./static/images/recipes.jpg"><img></a>    
+                    <a href="./recipes.html"><img src="recipes.jpg"><img></a>    
                 </div>
                 <div class="recipetext">
                     <h2>Recipes</h3> <br>
@@ -30,7 +30,7 @@
             </div>
         <div class="right_content">
             <div class="unitconversionimagecontainer">
-                <a href="./unitconversion"><img src="./static/images/unitconversion.jpg"><img></a>
+                <a href="./unitconversion.html"><img src="unitconversion.jpg"><img></a>
             </div>
             <div class="unittext">
                 <h2>Unit Conversion</h2> <br>

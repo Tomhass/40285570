@@ -1,88 +1,56 @@
-import ConfigParser
-from flask import Flask, redirect, url_for, render_template, session
-from config import Config
+from flask import Flask, redirect, render_template, request
 
 app = Flask(__name__)
-app.secret_key = 'sd3.4=109ga.klma3,420-4123'
+import models as DatabaseHandler
 
-app.config.from_object(__name__)
+app.secret_key = '41o3190fsdlm8ofdvbm0934j'
 
 
 #ROOT
 @app.route('/')
-def index():
-	return render_template('./home.html')
+def root():
+	return render_template('/home.html')
 
-@app.route('/session/write/<name>/')
-def write(name=None):
-	session['name'] = name
-	return 'Wrote %s into "name" key of session' % name
+@app.route('/recipes')
+def recipes():
+	return render_template('/recipes.html')
 
-@app.route('/session/read/')
-def read():
-	try:
-		if(session['name']):
-			return str(session['name'])
-	except KeyError:
-		pass
-	return 'No session variable set for "name" key'
+@app.route('/unitconversion')
+def unitconversion():
+	return render_template('/unitconversion.html')
 
-@app.route('/session/remove/')
-def remove():
-	session.pop('name', None)
-	return "Removed key 'name' from session"
+@app.route('/liquidcups')
+def liquidcups():
+	return render_template('liquidcups.html')
 
-@app.route('/config/')
-def config():
-	s = []
-	s.append('debug:'+app.config['DEBUG'])
-	s.append('port:'+app.config['port'])
-	s.append('url:'+app.config['url'])
-	s.append('ip_address:'+app.config['ip_address'])
-	return ', '.join(s)
+@app.route('/poundsounces')
+def poundsounces():
+	return render_template('poundsounces.html')
 
-def init(app):
-	config = ConfigParser.ConfigParser()
-	try:
-		config_location = "etc/defaults.cfg"
-		config.read(config_location)
-		app.config['DEBUG'] = config.get("config", "debug")
-		app.config['ip_address'] = config.get("config", "ip_address")
-		app.config['port'] = config.get("config", "port")
-		app.config['url'] = config.get("config", "url")
-	except:
-		print "could not read configs from: ", config_location
-
-
-#ROUTES
-@app.route("/general/")
-def general():
-	return "Gneral forum pa"
-
-#ROUTES FOR LOGIN/LOGOUT
-@app.route("/login")
+#LOGIN/REGISTER ROOTS
+@app.route('/login', methods=["GET","POST"])
 def login():
-	return "LOGIN ROUTE"
-@app.route("/register")
+
+	if request.method == "POST":
+		
+		attempted_username = request.form['username']
+		attempted_password = request.form['password']
+
+	return render_template('login.html')
+
+@app.route('/register', methods=["GET","POST"])
 def register():
-	return "REGISTER ROUTE"
+	if request.method == "POST":
+		attempted_username = request.form['username']
+		attempted_password = request.form['password']
+		attempted_email = request.form['email']
+		DatabaseHandler.insertUser(attempted_username, attempted_password, attempted_email)
 
-#PRIVATE ROUTS
-@app.route("/membersarea")
-def membersarea():
-	# TEST FOR USER LOGIN
-	#
-	# IF USER NOT LOGGED IN REDIRECT TO LOGIN PAGE
-	return redirect(url_for('login'))
-
-#ERROR HANDLING
+	return render_template('/register.html')	
 @app.errorhandler(404)
 def page_not_found(error):
-	return "THAT PAGE DOESN'T EXIST YOU WEAPON", 404
-#TEST(replace '404' with error code required)
-def forceerror():
-	abort(404)
+	return "Page doesn't exist", 404
+
 
 if __name__ == "__main__":
-	init(app)
-	app.run(host.config['ip_address'], port=int(app.config['port']), debug=True)
+	app.run(host='0.0.0.0:80', debug=True)
